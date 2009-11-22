@@ -4,9 +4,11 @@ require 'nokogiri'
 
 # Perform a google search
 #doc = Nokogiri::HTML(open('http://google.com/search?q=tenderlove'))
-#doc = Nokogiri::HTML(open('http://google.com/search?q=edaya'))
+
+# doc.class will be Nokogiri::XML::Document
 doc = Nokogiri::XML(open('iTunes Music Librarytest.xml'))
-#puts doc
+#puts "doc.class = #{doc.class}"
+
 # Print out each link using an xml selector
 # puts doc.child.node_name()
 # puts doc.children
@@ -16,15 +18,34 @@ doc = Nokogiri::XML(open('iTunes Music Librarytest.xml'))
 #   puts a_tag.content
 # end
 
-# note=doc.search("key") # find all tags with the node_name "key"
-# puts note
+a = doc.search("/plist[1]/dict[1]/dict[1]/key[2]")
+b = doc.search("/plist[1]/dict[1]/dict[1]/dict[2]")
+c = doc.search("/plist[1]/dict[1]/dict[1]/key[3]")
+d = doc.search("/plist[1]/dict[1]/dict[1]/dict[3]")
 
-# doc.xpath('/').each do |a_tag|
-#   puts a_tag.content
-# end
+puts a,b
+puts c,d
 
+# find all tags with a key of Artist
 # Search for nodes by xpath
-puts doc.xpath('/*/*/*/*/key[. = "Artist"]')
+puts doc.search('/*/*/*/*/key[. = "Artist"]')
+
+doc.xpath('/*/*/*/*/key[. = "Artist"]').each do |a_tag|
+  puts a_tag.content
+  puts a_tag.parent.content
+end
+
+puts "*** Bon Jovi ***"
+doc.xpath('/*/*/*/*/string[. = "Bon Jovi"]').each do |a_tag|
+  puts a_tag.content
+  # puts a_tag.child.content
+end
+
+
+
+
+
+
 
 
 

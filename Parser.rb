@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 # Ref http://nokogiri.org/
-# http://wiki.github.com/tenderlove/nokogiri
+# Ref http://wiki.github.com/tenderlove/nokogiri
 
 
 doc = Nokogiri::HTML.parse(<<-eohtml)
